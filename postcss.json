@@ -1,0 +1,19 @@
+{
+  "use": [
+    "postcss-flexbugs-fixes",
+    "autoprefixer",
+    "cssnano"
+  ],
+  "input": "compiled/css/style.css",
+  "output": "compiled/css/style.min.css",
+  "watch": true,
+  "map": {
+    "inline": false
+  },
+  "autoprefixer": {
+    "browsers": "> 5%"
+  },
+  "cssnano": {
+    "autoprefixer": false
+  }
+}
