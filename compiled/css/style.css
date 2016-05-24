@@ -7,8 +7,10 @@ html {
 img {
   background-color: transparent; }
 
-body {
-  font-family: Helvetica-Lignt, sans-serif; }
+.container {
+  font-family: Helvetica-Lignt, sans-serif;
+  margin: 0 auto;
+  max-width: 800px; }
 
 nav {
   background: #161616;
@@ -33,11 +35,13 @@ nav {
 
 .sub-title {
   font-size: 27px;
+  font-weight: 300;
   text-align: center; }
 
 .sub-title2 {
   font-size: 24px;
   margin-bottom: 0;
+  font-weight: 300;
   text-align: center; }
 
 .recent-videos {
@@ -49,5 +53,23 @@ nav {
 
 .content {
   padding: 10px; }
+
+.search-wrapper {
+  border-radius: 5px;
+  margin: 20px auto;
+  height: 100px;
+  max-width: 600px;
+  background-color: #2f2f30;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.5em; }
+
+[name=recipe] {
+  width: 18em; }
+
+[name=submit] {
+  background: #8da836;
+  border-radius: 5px; }
 
 /*# sourceMappingURL=style.css.map */

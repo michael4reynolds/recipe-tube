@@ -17,11 +17,11 @@
       <img class="logo" src="img/restaurant-cutlery.svg" alt="logo">
       <h1 class="nav-title">Recipe-Tube!</h1>
     </nav>
-    <main>
+    <article>
       <section class="info">
         <h1>Discover Recipes</h1>
         <p class="sub-title">With printed ingredients, instructions and video!</p>
-        <p class="sub-title2">Recent entries:</p>
+        <p class="sub-title2">Most recent entries:</p>
       </section>
       <main class="content">
       <section class="recent-videos">
@@ -29,8 +29,17 @@
         <img src="https://unsplash.it/200/134/?random&blur" alt="recent video 1">
         <img src="https://unsplash.it/200/134/?random&blur" alt="recent video 1">
       </section>
+      <section class="search">
+        <p class="sub-title2">Search for more recipes below:</p>
+        <div class="search-wrapper">
+          <form id="recipe-search">
+            <input type="text" name="recipe" placeholder="Search for a recipe">
+            <input type="submit" name="submit">
+          </form>
+        </div>
+      </section>
       </main>
-    </main>
+    </article>
   </div>
 
   <script src="//code.jquery.com/jquery.min.js"></script>
