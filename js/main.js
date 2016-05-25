@@ -1,15 +1,16 @@
-function getRequest(searchTerm, _pageToken='') {
+function getRequest(searchTerm, _pageToken = '') {
   // prepare the request
   let params = {
     part: 'snippet',
     key: 'AIzaSyB9evlzwtgDeMvhbSA-zVYUBQf_K1jcWfc',
-    q: searchTerm,
+    q: searchTerm + ' recipe',
     type: 'video',
     maxResults: 3,
     order: 'date',
     regionCode: 'US',
-    videoCategoryId: 26,
-    fields: "nextPageToken,items(id(videoId)),items(snippet(title,thumbnails(high)))",
+    fields: 'nextPageToken,prevPageToken,' +
+    'items(id(videoId)),' +
+    'items(snippet(title,thumbnails(high)))',
     pageToken: _pageToken
   }
   let url = "https://www.googleapis.com/youtube/v3/search"
@@ -20,7 +21,7 @@ function getRequest(searchTerm, _pageToken='') {
   }, 'json')
 }
 
-let displayResults = function(data) {
+let displayResults = function (data) {
   console.log(data.nextPageToken)
   for (let value of data.items) {
     console.log(value.id.videoId)

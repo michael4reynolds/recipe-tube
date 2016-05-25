@@ -7,13 +7,12 @@ function getRequest(searchTerm) {
   var params = {
     part: 'snippet',
     key: 'AIzaSyB9evlzwtgDeMvhbSA-zVYUBQf_K1jcWfc',
-    q: searchTerm,
+    q: searchTerm + ' recipe',
     type: 'video',
     maxResults: 3,
     order: 'date',
     regionCode: 'US',
-    videoCategoryId: 26,
-    fields: "nextPageToken,items(id(videoId)),items(snippet(title,thumbnails(high)))",
+    fields: 'nextPageToken,prevPageToken,' + 'items(id(videoId)),' + 'items(snippet(title,thumbnails(high)))',
     pageToken: _pageToken
   };
   var url = "https://www.googleapis.com/youtube/v3/search";
