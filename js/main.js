@@ -17,20 +17,25 @@ function getRequest(searchTerm, _pageToken = '') {
 
   // execute the request
   $.get(url, params, function (data) {
-    displayResults(data)
+    displayMostRecents(data)
   }, 'json')
 }
 
-let displayResults = function (data) {
-  console.log(data.nextPageToken)
+let displayMostRecents = function (data) {
+  $('.recents.videos').html('')
+
+  let index = 1
   for (let value of data.items) {
-    console.log(value.id.videoId)
-    console.log(value.snippet.title)
-    console.log(value.snippet.thumbnails.high.url)
+    let vidframe = `
+      <a href="https://www.youtube.com/watch?v=${value.id.videoId}" target="_blank">
+        <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}">
+      </a>
+    `
+    $('.recents.videos').append(vidframe)
   }
 }
 
 $(function () {
-  getRequest('recipe')
+  getRequest('')
 })
 

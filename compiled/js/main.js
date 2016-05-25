@@ -19,12 +19,14 @@ function getRequest(searchTerm) {
 
   // execute the request
   $.get(url, params, function (data) {
-    displayResults(data);
+    displayMostRecents(data);
   }, 'json');
 }
 
-var displayResults = function displayResults(data) {
-  console.log(data.nextPageToken);
+var displayMostRecents = function displayMostRecents(data) {
+  $('.recents.videos').html('');
+
+  var index = 1;
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
@@ -33,9 +35,8 @@ var displayResults = function displayResults(data) {
     for (var _iterator = data.items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var value = _step.value;
 
-      console.log(value.id.videoId);
-      console.log(value.snippet.title);
-      console.log(value.snippet.thumbnails.high.url);
+      var vidframe = '\n      <a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="_blank">\n        <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '">\n      </a>\n    ';
+      $('.recents.videos').append(vidframe);
     }
   } catch (err) {
     _didIteratorError = true;
@@ -54,6 +55,6 @@ var displayResults = function displayResults(data) {
 };
 
 $(function () {
-  getRequest('recipe');
+  getRequest('');
 });
 //# sourceMappingURL=main.js.map
