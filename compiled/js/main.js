@@ -70,7 +70,7 @@ function displayResults(url, params, el, thumbType) {
 $(function () {
   displayResults.apply(undefined, _toConsumableArray(getRequest('')).concat(['.recents.videos', thumbRecent]));
 
-  $('[name=submit]').on('click', function (e) {
+  $('#recipe-search').on('submit', function (e) {
     e.preventDefault();
 
     var searchTerm = $('[name=recipe]').val();

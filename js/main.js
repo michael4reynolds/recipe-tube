@@ -51,7 +51,7 @@ function displayResults(url, params, el, thumbType) {
 $(function () {
   displayResults(...getRequest(''), '.recents.videos', thumbRecent)
 
-  $('[name=submit]').on('click', (e) => {
+  $('#recipe-search').on('submit', (e) => {
     e.preventDefault()
 
     let searchTerm = $('[name=recipe]').val()

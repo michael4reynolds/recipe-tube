@@ -18,10 +18,10 @@ img {
 }
 
 nav {
-    background: #161616;
-    height: 75px;
-    display: flex;
     align-content: center;
+    background: #161616;
+    display: flex;
+    height: 75px;
 }
 
 .logo {
@@ -76,25 +76,31 @@ nav {
 }
 
 .search-wrapper {
-    border-radius: 5px;
-    margin: 20px auto;
-    height: 100px;
-    max-width: 600px;
-    background-color: #2f2f30;
-    display: flex;
-    justify-content: space-around;
     align-items: center;
+    background-color: #2f2f30;
+    border-radius: 5px;
+    display: flex;
     font-size: 1.5em;
+    height: 100px;
+    justify-content: space-around;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+#recipe-search {
+    display: flex;
+    justify-content: flex-start;
 }
 
 [name=recipe] {
-    width: 18em;
+    padding: 0 3px;
+    width: 23em;
 }
 
-[name=submit] {
-    background: #8da836;
-    border-radius: 5px;
-    color: #ececec;
+@media screen and (max-width: 600px){
+    [name=recipe] {
+        width: 15em;
+    }
 }
 
 .search-label {
