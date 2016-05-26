@@ -25,8 +25,10 @@ let thumbRecent = function(value, index) {
 }
 
 let thumbResult = function(value, index) {
+  const yt = 'https://www.youtube.com/'
+  const vId = value.id.videoId;
   return {index: index, thumb: `
-          <a href="https://www.youtube.com/watch?v=${value.id.videoId}" class="recipe-video">
+          <a href="${yt}watch?v=${vId}" class="recipe-video" data-video="${yt}embed/${vId}?autoplay=1">
             <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}">
             <p>${value.snippet.title.truncateString(25).toLowerCase()}</p>
           </a>
@@ -56,6 +58,13 @@ $(function () {
 
     let searchTerm = $('[name=recipe]').val()
     displayResults(...getRequest(searchTerm), '.results.videos', thumbResult)
+  })
+
+  $('.results.videos').on('click', '.recipe-video', function(e) {
+    e.preventDefault()
+
+    let embed = $(this).attr('data-video')
+    window.open(embed, '_blank', 'height=400,width=600,top=300,left=300')
   })
 })
 
