@@ -22,10 +22,19 @@ function getRequest(searchTerm) {
   var url = "https://www.googleapis.com/youtube/v3/search";
   return [url, params];
 }
-function displayMostRecent(url, params) {
+
+var thumbRecent = function thumbRecent(value, index) {
+  return { index: index, thumb: '\n          <a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="_blank">\n            <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '">\n          </a>\n        ' };
+};
+
+var thumbResult = function thumbResult(value, index) {
+  return { index: index, thumb: '\n          <a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" class="recipe-video">\n            <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '">\n            <p>' + value.snippet.title.truncateString(25).toLowerCase() + '</p>\n          </a>\n        ' };
+};
+
+function displayResults(url, params, el, thumbType) {
   $.get(url, params, function (data) {
-    var $recents = $('.recents.videos');
-    $recents.html('');
+    var $element = $(el);
+    $element.html('');
 
     var index = 1;
     var _iteratorNormalCompletion = true;
@@ -36,8 +45,10 @@ function displayMostRecent(url, params) {
       for (var _iterator = data.items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var value = _step.value;
 
-        var thumb = '\n      <a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="_blank">\n        <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '">\n      </a>\n    ';
-        $recents.append(thumb);
+        var __ret = thumbType(value, index);
+        index = __ret.index;
+        var thumb = __ret.thumb;
+        $element.append(thumb);
       }
     } catch (err) {
       _didIteratorError = true;
@@ -57,6 +68,19 @@ function displayMostRecent(url, params) {
 }
 
 $(function () {
-  displayMostRecent.apply(undefined, _toConsumableArray(getRequest('')));
+  displayResults.apply(undefined, _toConsumableArray(getRequest('')).concat(['.recents.videos', thumbRecent]));
+
+  $('[name=submit]').on('click', function (e) {
+    e.preventDefault();
+
+    var searchTerm = $('[name=recipe]').val();
+    displayResults.apply(undefined, _toConsumableArray(getRequest(searchTerm)).concat(['.results.videos', thumbResult]));
+  });
 });
+
+String.prototype.truncateString = function (max) {
+  var add = arguments.length <= 1 || arguments[1] === undefined ? '...' : arguments[1];
+
+  return this.length > max ? this.substring(0, max) + add : this;
+};
 //# sourceMappingURL=main.js.map

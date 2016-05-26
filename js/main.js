@@ -15,24 +15,51 @@ function getRequest(searchTerm, max=3, orderby='date', _pageToken='') {
   let url = "https://www.googleapis.com/youtube/v3/search"
   return [url, params]
 }
-function displayMostRecent(url, params) {
+
+let thumbRecent = function(value, index) {
+  return {index: index, thumb: `
+          <a href="https://www.youtube.com/watch?v=${value.id.videoId}" target="_blank">
+            <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}">
+          </a>
+        `};
+}
+
+let thumbResult = function(value, index) {
+  return {index: index, thumb: `
+          <a href="https://www.youtube.com/watch?v=${value.id.videoId}" class="recipe-video">
+            <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}">
+            <p>${value.snippet.title.truncateString(25).toLowerCase()}</p>
+          </a>
+        `};
+}
+
+function displayResults(url, params, el, thumbType) {
   $.get(url, params, function (data) {
-    var $recents = $('.recents.videos')
-    $recents.html('')
+    var $element = $(el)
+    $element.html('')
 
     let index = 1
     for (let value of data.items) {
-      let thumb = `
-      <a href="https://www.youtube.com/watch?v=${value.id.videoId}" target="_blank">
-        <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}">
-      </a>
-    `
-      $recents.append(thumb)
+      let __ret = thumbType(value, index);
+      index = __ret.index;
+      let thumb = __ret.thumb;
+      $element.append(thumb)
     }
   }, 'json')
 }
 
 $(function () {
-  displayMostRecent(...getRequest(''))
+  displayResults(...getRequest(''), '.recents.videos', thumbRecent)
+
+  $('[name=submit]').on('click', (e) => {
+    e.preventDefault()
+
+    let searchTerm = $('[name=recipe]').val()
+    displayResults(...getRequest(searchTerm), '.results.videos', thumbResult)
+  })
 })
 
+
+String.prototype.truncateString = function (max, add='...') {
+  return (this.length > max ? this.substring(0, max) + add : this)
+}

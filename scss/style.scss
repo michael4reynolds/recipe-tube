@@ -60,13 +60,14 @@ nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 10px auto;
+    margin: 15px auto;
     max-width: 800px;
 }
 
 .recents img {
     border-radius: 2em;
-    height: 134px;
+    height: 138px;
+    margin: 0 5px;
     width: 200px;
 }
 
@@ -101,14 +102,30 @@ nav {
     text-align: left;
 }
 
-.recipe-video img {
-    border-radius: .5em;
+.recipe-video {
+    color: #943f2e;
+
+    img {
+        border-radius: .5em;
+        height: 148px;
+        margin: 0 5px;
+        width: 220px;
+    }
+
+    p {
+        text-align: center;
+    }
+}
+
+.results.videos a {
+    text-decoration: none;
 }
 
 .directions {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     font-weight: 300;
+    justify-content: space-between;
     line-height: 1.3em;
     padding: 15px;
 }
@@ -118,6 +135,7 @@ nav {
     border-radius: 5px;
     flex: 1;
     margin: 10px;
+    min-width: 300px;
     padding: 10px;
 }
 
@@ -129,17 +147,17 @@ nav {
 .btn-more {
     background-color: #8da836;
     border-radius: 10px;
-    font-size: 1.3em;
     color: #ececec;
+    font-size: 1.3em;
     padding: 10px 20px;
 }
 
 footer {
-    background: #161616;
-    height: 75px;
-    display: flex;
     align-content: center;
+    background: #161616;
     color: #ececec;
+    display: flex;
+    height: 75px;
     margin: 20px 0;
     padding: 5px;
 }
