@@ -28,7 +28,9 @@ var thumbRecent = function thumbRecent(value, index) {
 };
 
 var thumbResult = function thumbResult(value, index) {
-  return { index: index, thumb: '\n          <a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" class="recipe-video">\n            <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '">\n            <p>' + value.snippet.title.truncateString(25).toLowerCase() + '</p>\n          </a>\n        ' };
+  var yt = 'https://www.youtube.com/';
+  var vId = value.id.videoId;
+  return { index: index, thumb: '\n          <a href="' + yt + 'watch?v=' + vId + '" class="recipe-video" data-video="' + yt + 'embed/' + vId + '?autoplay=1">\n            <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '">\n            <p>' + value.snippet.title.truncateString(25).toLowerCase() + '</p>\n          </a>\n        ' };
 };
 
 function displayResults(url, params, el, thumbType) {
@@ -75,6 +77,13 @@ $(function () {
 
     var searchTerm = $('[name=recipe]').val();
     displayResults.apply(undefined, _toConsumableArray(getRequest(searchTerm)).concat(['.results.videos', thumbResult]));
+  });
+
+  $('.results.videos').on('click', '.recipe-video', function (e) {
+    e.preventDefault();
+
+    var embed = $(this).attr('data-video');
+    window.open(embed, '_blank', 'height=400,width=600,top=300,left=300');
   });
 });
 
