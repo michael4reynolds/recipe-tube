@@ -21,18 +21,18 @@ let thumbRecent = function(value, index) {
           <a href="https://www.youtube.com/watch?v=${value.id.videoId}" target="_blank">
             <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}">
           </a>
-        `};
+        `}
 }
 
 let thumbResult = function(value, index) {
   const yt = 'https://www.youtube.com/'
-  const vId = value.id.videoId;
+  const vId = value.id.videoId
   return {index: index, thumb: `
           <a href="${yt}watch?v=${vId}" class="recipe-video" data-video="${yt}embed/${vId}?autoplay=1">
             <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}">
             <p>${value.snippet.title.truncateString(25).toLowerCase()}</p>
           </a>
-        `};
+        `}
 }
 
 function displayResults(url, params, el, thumbType) {
@@ -42,9 +42,9 @@ function displayResults(url, params, el, thumbType) {
 
     let index = 1
     for (let value of data.items) {
-      let __ret = thumbType(value, index);
-      index = __ret.index;
-      let thumb = __ret.thumb;
+      let __ret = thumbType(value, index)
+      index = __ret.index
+      let thumb = __ret.thumb
       $element.append(thumb)
     }
   }, 'json')
