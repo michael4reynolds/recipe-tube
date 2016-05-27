@@ -127,24 +127,6 @@ nav {
     text-decoration: none;
 }
 
-.directions {
-    display: flex;
-    flex-wrap: wrap;
-    font-weight: 300;
-    justify-content: space-between;
-    line-height: 1.3em;
-    padding: 15px;
-}
-
-.dir-column {
-    border: 1px solid #ececec;
-    border-radius: 5px;
-    flex: 1;
-    margin: 10px;
-    min-width: 300px;
-    padding: 10px;
-}
-
 .btn-wrapper {
     display: flex;
     justify-content: center;
