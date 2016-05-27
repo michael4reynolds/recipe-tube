@@ -39,6 +39,7 @@ function displayResults(url, params, el, thumbType) {
   $.get(url, params, function (data) {
     var $element = $(el)
     $element.html('')
+    $('.btn-more').attr('next', data.nextPageToken)
 
     let index = 1
     for (let value of data.items) {
@@ -50,24 +51,35 @@ function displayResults(url, params, el, thumbType) {
   }, 'json')
 }
 
+let getSearchTerm = () => {
+  return $('[name=recipe]').val()
+}
+
+let popUpYT = function (e) {
+  e.preventDefault()
+  let embed = $(this).attr('data-video')
+  window.open(embed, '_blank', 'height=400,width=600,top=300,left=300')
+}
+
+let showNextYT = function () {
+  displayResults(...getRequest(getSearchTerm(), undefined, undefined, 
+    $('.btn-more').attr('next')), '.results.videos', thumbResult)
+}
+
 $(function () {
   displayResults(...getRequest(''), '.recents.videos', thumbRecent)
 
   $('#recipe-search').on('submit', (e) => {
     e.preventDefault()
-
-    let searchTerm = $('[name=recipe]').val()
-    displayResults(...getRequest(searchTerm), '.results.videos', thumbResult)
+    displayResults(...getRequest(getSearchTerm()), '.results.videos', thumbResult)
   })
 
-  $('.results.videos').on('click', '.recipe-video', function(e) {
-    e.preventDefault()
+  $('.results.videos').on('click', '.recipe-video', popUpYT)
 
-    let embed = $(this).attr('data-video')
-    window.open(embed, '_blank', 'height=400,width=600,top=300,left=300')
+  $('.btn-more').on('click', function() {
+    showNextYT()
   })
 })
-
 
 String.prototype.truncateString = function (max, add='...') {
   return (this.length > max ? this.substring(0, max) + add : this)
