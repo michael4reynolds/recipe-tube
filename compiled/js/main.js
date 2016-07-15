@@ -24,13 +24,13 @@ function getRequest(searchTerm) {
 }
 
 var thumbRecent = function thumbRecent(value, index) {
-  return { index: index, thumb: '\n          <a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="_blank">\n            <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '" class="responsive-img">\n          </a>\n        ' };
+  return { index: index, thumb: '\n          <div class="col s12 m6 l4">\n            <div class="card">\n              <div class="card-image">\n                <a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="_blank">\n                  <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '" class="responsive-img">\n                  <span class="card-title">' + value.snippet.title.toLowerCase() + '</span>\n                </a>\n              </div>\n            </div>\n          </div>\n        ' };
 };
 
 var thumbResult = function thumbResult(value, index) {
   var yt = 'https://www.youtube.com/';
   var vId = value.id.videoId;
-  return { index: index, thumb: '\n          <a href="' + yt + 'watch?v=' + vId + '" class="recipe-video" data-video="' + yt + 'embed/' + vId + '?autoplay=1">\n            <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '">\n            <p>' + value.snippet.title.truncateString(25).toLowerCase() + '</p>\n          </a>\n        ' };
+  return { index: index, thumb: '\n          <a href="' + yt + 'watch?v=' + vId + '" class="recipe-video" data-video="' + yt + 'embed/' + vId + '?autoplay=1">\n            <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '">\n            <p>' + value.snippet.title.truncateString(35).toLowerCase() + '</p>\n          </a>\n        ' };
 };
 
 function displayResults(url, params, el, thumbType) {

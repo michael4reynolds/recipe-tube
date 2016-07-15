@@ -18,9 +18,16 @@ function getRequest(searchTerm, max=3, orderby='date', _pageToken='') {
 
 let thumbRecent = function(value, index) {
   return {index: index, thumb: `
-          <a href="https://www.youtube.com/watch?v=${value.id.videoId}" target="_blank">
-            <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}" class="responsive-img">
-          </a>
+          <div class="col s12 m6 l4">
+            <div class="card">
+              <div class="card-image">
+                <a href="https://www.youtube.com/watch?v=${value.id.videoId}" target="_blank">
+                  <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}" class="responsive-img">
+                  <span class="card-title">${value.snippet.title.toLowerCase()}</span>
+                </a>
+              </div>
+            </div>
+          </div>
         `}
 }
 
@@ -30,7 +37,7 @@ let thumbResult = function(value, index) {
   return {index: index, thumb: `
           <a href="${yt}watch?v=${vId}" class="recipe-video" data-video="${yt}embed/${vId}?autoplay=1">
             <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}">
-            <p>${value.snippet.title.truncateString(25).toLowerCase()}</p>
+            <p>${value.snippet.title.truncateString(35).toLowerCase()}</p>
           </a>
         `}
 }
