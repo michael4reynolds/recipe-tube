@@ -62,7 +62,7 @@ let popUpYT = function (e) {
 }
 
 let showNextYT = function () {
-  displayResults(...getRequest(getSearchTerm(), undefined, undefined, 
+  displayResults(...getRequest(getSearchTerm(), undefined, undefined,
     $('.btn-more').attr('next')), '.results.videos', thumbResult)
 }
 
