@@ -19,7 +19,7 @@ function getRequest(searchTerm, max=3, orderby='date', _pageToken='') {
 let thumbRecent = function(value, index) {
   return {index: index, thumb: `
           <a href="https://www.youtube.com/watch?v=${value.id.videoId}" target="_blank">
-            <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}">
+            <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}" class="responsive-img">
           </a>
         `}
 }

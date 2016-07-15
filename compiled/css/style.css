@@ -43,4 +43,9 @@ nav {
   margin: 0 auto;
   max-width: 1280px; }
 
+.recent3 section {
+  display: flex; }
+  .recent3 section a:nth-of-type(2) {
+    margin: 0 5px; }
+
 /*# sourceMappingURL=style.css.map */

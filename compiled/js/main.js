@@ -24,7 +24,7 @@ function getRequest(searchTerm) {
 }
 
 var thumbRecent = function thumbRecent(value, index) {
-  return { index: index, thumb: '\n          <a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="_blank">\n            <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '">\n          </a>\n        ' };
+  return { index: index, thumb: '\n          <a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="_blank">\n            <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '" class="responsive-img">\n          </a>\n        ' };
 };
 
 var thumbResult = function thumbResult(value, index) {
