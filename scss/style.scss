@@ -1,10 +1,3 @@
-nav {
-    li {
-        height: 56px;
-        margin: 5px 20px;
-    }
-}
-
 .logo {
     max-height: 100%;
 }
@@ -18,29 +11,40 @@ nav {
 }
 
 nav {
-    height: 80px;
-    display: flex;
-    align-items: center;
+    height: auto;
     ul {
         width: 100%;
+        display: flex;
         li {
             display: flex;
             align-items: center;
+            height: 56px;
+            margin: 5px 15px;
+            &:nth-of-type(2) {
+                margin-right: auto;
+            }
         }
     }
 }
 
-.sm-search-container {
+.nav-row {
     display: flex;
+    align-items: center;
     justify-content: center;
-    .search {
-        width: 80%;
+}
+
+#sm-search-box {
+    input {
+        width: 90vw;
+        max-width: 430px;
+        margin: 5px 0 10px 0;
     }
 }
 
 .search {
-    width: calc(100% - 680px);
-    min-width: 175px;
+    width: calc(100% - 400px);
+    min-width: 270px;
+    max-width: 430px;
 }
 
 .no-vrt-margin {

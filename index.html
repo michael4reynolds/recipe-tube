@@ -12,24 +12,22 @@
   </head>
   <body>
     <nav class="wide">
-      <ul>
-        <li>
-          <img class="logo" src="img/restaurant-cutlery.svg" alt="logo">
-        </li>
-        <li>
-          <h3 class="nav-title white-text">Recipe-Tube!</h3>
-        </li>
-        <li class="search hide-on-small-only">
-          <input type="text" name="recipe" placeholder="Search for a recipe" class="white blue-text no-vrt-margin">
-        </li>
-      </ul>
-    </nav>
-    <nav class="grey darken-3 hide-on-med-and-up">
-      <ul class="sm-search-container">
-        <li class="search">
-          <input type="text" name="recipe" placeholder="Search for a recipe" class="white blue-text no-vrt-margin">
-        </li>
-      </ul>
+      <div class="nav-row">
+        <ul>
+          <li>
+            <img class="logo" src="img/restaurant-cutlery.svg" alt="logo">
+          </li>
+          <li>
+            <h3 class="nav-title white-text">Recipe-Tube!</h3>
+          </li>
+          <li class="search hide-on-small-only">
+            <input type="text" name="recipe" placeholder="Search for a recipe" class="white blue-text no-vrt-margin">
+          </li>
+        </ul>
+      </div>
+      <div id="sm-search-box" class="nav-row hide-on-med-and-up">
+        <input type="text" name="recipe" placeholder="Search for a recipe" class="white blue-text">
+      </div>
     </nav>
   </body>
 </html>
