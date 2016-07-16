@@ -45,6 +45,17 @@ nav {
     width: calc(100% - 400px);
     min-width: 270px;
     max-width: 430px;
+    form {
+        width: 100%;
+    }
+}
+
+#recipe-search, #recipe-search-sm {
+    input {
+        font-size: 1.4em;
+        padding: 0 .75em;
+        box-sizing: border-box;
+    }
 }
 
 .no-vrt-margin {
@@ -57,7 +68,7 @@ nav {
     max-width: 1280px;
 }
 
-.recents {
+.recents, .results {
     .col {
         padding: .10rem;
     }

@@ -34,6 +34,13 @@ nav {
   width: calc(100% - 400px);
   min-width: 270px;
   max-width: 430px; }
+  .search form {
+    width: 100%; }
+
+#recipe-search input, #recipe-search-sm input {
+  font-size: 1.4em;
+  padding: 0 .75em;
+  box-sizing: border-box; }
 
 .no-vrt-margin {
   margin-top: 0 !important;
@@ -43,13 +50,13 @@ nav {
   margin: 0 auto;
   max-width: 1280px; }
 
-.recents .col {
+.recents .col, .results .col {
   padding: .10rem; }
 
-.recents .card {
+.recents .card, .results .card {
   margin-top: 0; }
 
-.recents .card-title {
+.recents .card-title, .results .card-title {
   width: 100%;
   bottom: .3rem;
   position: absolute;

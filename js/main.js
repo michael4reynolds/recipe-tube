@@ -1,4 +1,4 @@
-function getRequest(searchTerm, max=3, orderby='date', _pageToken='') {
+function getRequest(searchTerm, max = 3, orderby = 'date', _pageToken = '') {
   let params = {
     part: 'snippet',
     key: 'AIzaSyB9evlzwtgDeMvhbSA-zVYUBQf_K1jcWfc',
@@ -8,16 +8,17 @@ function getRequest(searchTerm, max=3, orderby='date', _pageToken='') {
     order: orderby,
     regionCode: 'US',
     fields: 'nextPageToken,prevPageToken,' +
-            'items(id(videoId)),' +
-            'items(snippet(title,thumbnails(high)))',
+    'items(id(videoId)),' +
+    'items(snippet(title,thumbnails(high)))',
     pageToken: _pageToken
   }
   let url = "https://www.googleapis.com/youtube/v3/search"
   return [url, params]
 }
 
-let thumbRecent = function(value, index) {
-  return {index: index, thumb: `
+let thumbRecent = function (value, index) {
+  return {
+    index: index, thumb: `
           <div class="col s12 m6 l4">
             <div class="card">
               <div class="card-image">
@@ -28,18 +29,27 @@ let thumbRecent = function(value, index) {
               </div>
             </div>
           </div>
-        `}
+        `
+  }
 }
 
-let thumbResult = function(value, index) {
+let thumbResult = function (value, index) {
   const yt = 'https://www.youtube.com/'
   const vId = value.id.videoId
-  return {index: index, thumb: `
-          <a href="${yt}watch?v=${vId}" class="recipe-video" data-video="${yt}embed/${vId}?autoplay=1">
-            <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}">
-            <p>${value.snippet.title.truncateString(35).toLowerCase()}</p>
-          </a>
-        `}
+  return {
+    index: index, thumb: `
+        <div class="col s12 m6 l4">
+          <div class="card">
+            <div class="card-image">
+              <a href="${yt}watch?v=${vId}" class="recipe-video" data-video="${yt}embed/${vId}?autoplay=1">
+                <img src="${value.snippet.thumbnails.high.url}" alt="recent video ${index++}" class="responsive-img">
+                <span class="card-title">${value.snippet.title.toLowerCase()}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        `
+  }
 }
 
 function displayResults(url, params, el, thumbType) {
@@ -76,18 +86,16 @@ let showNextYT = function () {
 $(function () {
   displayResults(...getRequest(''), '.recents.videos', thumbRecent)
 
-  $('#recipe-search').on('submit', (e) => {
+  $('#recipe-search, #recipe-search-sm').on('submit', (e) => {
     e.preventDefault()
-    displayResults(...getRequest(getSearchTerm()), '.results.videos', thumbResult)
+    const searchTerm = getSearchTerm();
+    if (searchTerm === null || searchTerm.length < 2) return
+    displayResults(...getRequest(searchTerm), '.results.videos', thumbResult)
   })
 
   $('.results.videos').on('click', '.recipe-video', popUpYT)
 
-  $('.btn-more').on('click', function() {
+  $('.btn-more').on('click', function () {
     showNextYT()
   })
 })
-
-String.prototype.truncateString = function (max, add='...') {
-  return (this.length > max ? this.substring(0, max) + add : this)
-}

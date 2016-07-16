@@ -21,16 +21,23 @@
             <h3 class="nav-title white-text">Recipe-Tube!</h3>
           </li>
           <li class="search hide-on-small-only">
-            <input type="text" name="recipe" placeholder="Search for a recipe" class="white blue-text no-vrt-margin">
+            <form id="recipe-search">
+              <input type="text" name="recipe" placeholder="Search for a recipe" class="white blue-text no-vrt-margin">
+            </form>
           </li>
         </ul>
       </div>
-      <div id="ssearch-box" class="nav-row hide-on-med-and-up">
-        <input type="text" name="recipe" placeholder="Search for a recipe" class="white blue-text">
+      <div id="sm-search-box" class="nav-row hide-on-med-and-up">
+        <form id="recipe-search-sm">
+          <input type="text" name="recipe" placeholder="Search for a recipe" class="white blue-text">
+        </form>
       </div>
     </nav>
     <div class="wide">
+      <h4 class="center">Latest Recipe Videos</h4>
       <section class="recents videos row"></section>
+      <h4 class="center">Search Results</h4>
+      <section class="results videos row"></section>
     </div>
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="compiled/js/main.js"></script>
