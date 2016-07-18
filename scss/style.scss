@@ -96,10 +96,11 @@ nav {
     h5 {
         display: inline-block;
     }
-    span {
+    a {
         position: absolute;
-        top: 15px;
+        top: 2px;
         right: 20px;
+        font-size: 200%;
     }
 }
 

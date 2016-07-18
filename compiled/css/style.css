@@ -71,9 +71,10 @@ nav {
   position: relative; }
   #search-header h5, #results-header h5 {
     display: inline-block; }
-  #search-header span, #results-header span {
+  #search-header a, #results-header a {
     position: absolute;
-    top: 15px;
-    right: 20px; }
+    top: 2px;
+    right: 20px;
+    font-size: 200%; }
 
 /*# sourceMappingURL=style.css.map */
