@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="compiled/css/style.css">
   </head>
   <body>
-    <nav class="wide">
+    <nav class="wide amber darken-3">
       <div class="nav-row">
         <ul>
           <li>
@@ -34,9 +34,19 @@
       </div>
     </nav>
     <div class="wide">
-      <h4 class="center">Latest Recipe Videos</h4>
+      <div id="search-header" class="row grey lighten-2">
+        <div class="center">
+          <h5>Latest Recipe Videos</h5>
+          <span class="right">down</span>
+        </div>
+      </div>
       <section class="recents videos row"></section>
-      <h4 class="center">Search Results</h4>
+      <div id="results-header" class="row">
+        <div class="center grey lighten-2">
+          <h5>Recipe Search Results</h5>
+          <span class="right">up</span>
+        </div>
+      </div>
       <section class="results videos row"></section>
     </div>
     <script src="//code.jquery.com/jquery.min.js"></script>

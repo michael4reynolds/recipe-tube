@@ -95,7 +95,7 @@ $(function () {
     e.preventDefault();
     var searchTerm = getSearchTerm();
     if (searchTerm === null || searchTerm.length < 2) return;
-    displayResults.apply(undefined, _toConsumableArray(getRequest(searchTerm)).concat(['.results.videos', thumbResult]));
+    displayResults.apply(undefined, _toConsumableArray(getRequest(searchTerm, 6)).concat(['.results.videos', thumbResult]));
   });
 
   $('.results.videos').on('click', '.recipe-video', popUpYT);

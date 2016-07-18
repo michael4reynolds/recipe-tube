@@ -90,7 +90,7 @@ $(function () {
     e.preventDefault()
     const searchTerm = getSearchTerm();
     if (searchTerm === null || searchTerm.length < 2) return
-    displayResults(...getRequest(searchTerm), '.results.videos', thumbResult)
+    displayResults(...getRequest(searchTerm, 6), '.results.videos', thumbResult)
   })
 
   $('.results.videos').on('click', '.recipe-video', popUpYT)

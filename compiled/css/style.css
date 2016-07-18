@@ -50,19 +50,30 @@ nav {
   margin: 0 auto;
   max-width: 1280px; }
 
-.recents .col, .results .col {
-  padding: .10rem; }
+.recents, .results {
+  margin-bottom: 0; }
+  .recents .col, .results .col {
+    padding: 0 .10rem; }
+  .recents .card, .results .card {
+    margin-bottom: .1rem;
+    margin-top: 0; }
+  .recents .card-title, .results .card-title {
+    width: 100%;
+    bottom: .3rem;
+    position: absolute;
+    background: #000;
+    background: linear-gradient(to top, #000 25%, transparent 100%) repeat scroll 0 0 transparent;
+    color: #fff;
+    -webkit-font-smoothing: antialiased; }
 
-.recents .card, .results .card {
-  margin-top: 0; }
-
-.recents .card-title, .results .card-title {
-  width: 100%;
-  bottom: .3rem;
-  position: absolute;
-  background: #000;
-  background: linear-gradient(to top, #000 25%, transparent 100%) repeat scroll 0 0 transparent;
-  color: #fff;
-  -webkit-font-smoothing: antialiased; }
+#search-header, #results-header {
+  margin: 0;
+  position: relative; }
+  #search-header h5, #results-header h5 {
+    display: inline-block; }
+  #search-header span, #results-header span {
+    position: absolute;
+    top: 15px;
+    right: 20px; }
 
 /*# sourceMappingURL=style.css.map */

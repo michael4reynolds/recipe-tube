@@ -69,11 +69,13 @@ nav {
 }
 
 .recents, .results {
+    margin-bottom: 0;
     .col {
-        padding: .10rem;
+        padding: 0 .10rem;
     }
 
     .card {
+        margin-bottom: .1rem;
         margin-top: 0;
     }
 
@@ -87,3 +89,17 @@ nav {
         -webkit-font-smoothing: antialiased;
     }
 }
+
+#search-header, #results-header {
+    margin: 0;
+    position: relative;
+    h5 {
+        display: inline-block;
+    }
+    span {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+    }
+}
+
