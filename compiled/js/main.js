@@ -16,24 +16,19 @@ function getRequest(searchTerm) {
     maxResults: max,
     order: orderby,
     regionCode: 'US',
-    fields: 'nextPageToken,prevPageToken,' + 'items(id(videoId)),' + 'items(snippet(title,thumbnails(high)))',
+    fields: 'nextPageToken,prevPageToken,' + 'items(id(videoId)),' + 'items(snippet(title,channelTitle,thumbnails(high),publishedAt,description))',
     pageToken: _pageToken
   };
   var url = "https://www.googleapis.com/youtube/v3/search";
   return [url, params];
 }
 
-var thumbRecent = function thumbRecent(value, index) {
-  return {
-    index: index, thumb: '\n          <div class="col s12 m6 l4">\n            <div class="card">\n              <div class="card-image">\n                <a href="https://www.youtube.com/watch?v=' + value.id.videoId + '" target="_blank">\n                  <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '" class="responsive-img">\n                  <span class="card-title">' + value.snippet.title.toLowerCase() + '</span>\n                </a>\n              </div>\n            </div>\n          </div>\n        '
-  };
-};
-
 var thumbResult = function thumbResult(value, index) {
   var yt = 'https://www.youtube.com/';
   var vId = value.id.videoId;
   return {
-    index: index, thumb: '\n        <div class="col s12 m6 l4">\n          <div class="card">\n            <div class="card-image">\n              <a href="' + yt + 'watch?v=' + vId + '" class="recipe-video" data-video="' + yt + 'embed/' + vId + '?autoplay=1">\n                <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '" class="responsive-img">\n                <span class="card-title">' + value.snippet.title.toLowerCase() + '</span>\n              </a>\n            </div>\n          </div>\n        </div>\n        '
+    index: index,
+    thumb: '\n        <div class="col s12 m6 l4">\n          <div class="card">\n            <div class="card-image">\n              <a href="' + yt + 'watch?v=' + vId + '" class="recipe-video" \n                  data-video="' + yt + 'embed/' + vId + '?autoplay=1&controls=0&showinfo=0" \n                  data-author="' + value.snippet.channelTitle + '"\n                  data-published="' + value.snippet.publishedAt + '"\n                  data-description="' + value.snippet.description + '">\n                <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '" class="responsive-img">\n                <span class="card-title">' + value.snippet.title.toLowerCase() + '</span>\n              </a>\n            </div>\n          </div>\n        </div>\n        '
   };
 };
 
@@ -81,7 +76,17 @@ var getSearchTerm = function getSearchTerm() {
 var popUpYT = function popUpYT(e) {
   e.preventDefault();
   var embed = $(this).attr('data-video');
-  window.open(embed, '_blank', 'height=400,width=600,top=300,left=300');
+  var vidInfo = {
+    author: $(this).attr('data-author'),
+    published: $(this).attr('data-published'),
+    directions: $(this).attr('data-description')
+  };
+
+  $('.author').html(vidInfo.author);
+  $('.published').html(vidInfo.published.split('T')[0]);
+  $('.directions').html(vidInfo.directions);
+  $('.video-wrapper').html('<iframe src="' + embed + '" frameborder="0" allowfullscreen></iframe>');
+  $('#player-area').removeClass('hide');
 };
 
 var showNextYT = function showNextYT() {
@@ -89,7 +94,7 @@ var showNextYT = function showNextYT() {
 };
 
 $(function () {
-  displayResults.apply(undefined, _toConsumableArray(getRequest('')).concat(['.recents.videos', thumbRecent]));
+  displayResults.apply(undefined, _toConsumableArray(getRequest('')).concat(['.recents.videos', thumbResult]));
 
   $('#recipe-search, #recipe-search-sm').on('submit', function (e) {
     e.preventDefault();
@@ -98,7 +103,7 @@ $(function () {
     displayResults.apply(undefined, _toConsumableArray(getRequest(searchTerm, 6)).concat(['.results.videos', thumbResult]));
   });
 
-  $('.results.videos').on('click', '.recipe-video', popUpYT);
+  $('.recents.videos, .results.videos').on('click', '.recipe-video', popUpYT);
 
   $('.btn-more').on('click', function () {
     showNextYT();

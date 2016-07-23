@@ -68,11 +68,12 @@ nav {
     max-width: 1280px;
 }
 
+.col {
+    padding: 0 .10rem;
+}
+
 .recents, .results {
     margin-bottom: 0;
-    .col {
-        padding: 0 .10rem;
-    }
 
     .card {
         margin-bottom: .1rem;
@@ -105,9 +106,13 @@ nav {
 }
 
 #player-area {
-    .col {
-        padding: 0 .10rem;
-    }
+    position: absolute;
+    width: 100vw;
+    top: 25%;
+}
+
+.hide {
+    display: none;
 }
 
 .video-wrapper {
