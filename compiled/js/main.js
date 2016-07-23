@@ -28,7 +28,7 @@ var thumbResult = function thumbResult(value, index) {
   var vId = value.id.videoId;
   return {
     index: index,
-    thumb: '\n        <div class="col s12 m6 l4">\n          <div class="card">\n            <div class="card-image">\n              <a href="' + yt + 'watch?v=' + vId + '" class="recipe-video" \n                  data-video="' + yt + 'embed/' + vId + '?autoplay=1&controls=0&showinfo=0" \n                  data-author="' + value.snippet.channelTitle + '"\n                  data-published="' + value.snippet.publishedAt + '"\n                  data-description="' + value.snippet.description + '">\n                <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '" class="responsive-img">\n                <span class="card-title">' + value.snippet.title.toLowerCase() + '</span>\n              </a>\n            </div>\n          </div>\n        </div>\n        '
+    thumb: '\n        <div class="col s12 m6 l4">\n          <div class="card">\n            <div class="card-image">\n              <a href="#player-area" class="recipe-video modal-trigger" \n                  data-video="' + yt + 'embed/' + vId + '?autoplay=1&controls=0&showinfo=0" \n                  data-author="' + value.snippet.channelTitle + '"\n                  data-published="' + value.snippet.publishedAt + '"\n                  data-description="' + value.snippet.description + '">\n                <img src="' + value.snippet.thumbnails.high.url + '" alt="recent video ' + index++ + '" class="responsive-img">\n                <span class="card-title">' + value.snippet.title.toLowerCase() + '</span>\n              </a>\n            </div>\n          </div>\n        </div>\n        '
   };
 };
 
@@ -86,7 +86,13 @@ var popUpYT = function popUpYT(e) {
   $('.published').html(vidInfo.published.split('T')[0]);
   $('.directions').html(vidInfo.directions);
   $('.video-wrapper').html('<iframe src="' + embed + '" frameborder="0" allowfullscreen></iframe>');
-  $('#player-area').removeClass('hide');
+  $('#player-area').openModal({
+    dismissible: true,
+    opacity: .5,
+    complete: function complete() {
+      $('.video-wrapper').html('');
+    }
+  });
 };
 
 var showNextYT = function showNextYT() {

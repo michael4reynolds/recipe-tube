@@ -25,7 +25,7 @@ let thumbResult = function (value, index) {
         <div class="col s12 m6 l4">
           <div class="card">
             <div class="card-image">
-              <a href="${yt}watch?v=${vId}" class="recipe-video" 
+              <a href="#player-area" class="recipe-video modal-trigger" 
                   data-video="${yt}embed/${vId}?autoplay=1&controls=0&showinfo=0" 
                   data-author="${value.snippet.channelTitle}"
                   data-published="${value.snippet.publishedAt}"
@@ -73,7 +73,13 @@ let popUpYT = function (e) {
   $('.published').html(vidInfo.published.split('T')[0])
   $('.directions').html(vidInfo.directions)
   $('.video-wrapper').html(`<iframe src="${embed}" frameborder="0" allowfullscreen></iframe>`)
-  $('#player-area').removeClass('hide')
+  $('#player-area').openModal({
+    dismissible: true,
+    opacity: .5,
+    complete: function () {
+      $('.video-wrapper').html('')
+    }
+  })
 }
 
 let showNextYT = function () {

@@ -50,11 +50,10 @@ nav {
   margin: 0 auto;
   max-width: 1280px; }
 
-.col {
-  padding: 0 .10rem; }
-
 .recents, .results {
   margin-bottom: 0; }
+  .recents .col, .results .col {
+    padding: 0 .10rem; }
   .recents .card, .results .card {
     margin-bottom: .1rem;
     margin-top: 0; }
@@ -79,12 +78,9 @@ nav {
     font-size: 200%; }
 
 #player-area {
-  position: absolute;
-  width: 100vw;
-  top: 25%; }
-
-.hide {
-  display: none; }
+  max-height: 80%;
+  width: 85%;
+  padding-bottom: 24px; }
 
 .video-wrapper {
   float: none;
