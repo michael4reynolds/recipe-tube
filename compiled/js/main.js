@@ -33,10 +33,11 @@ var thumbResult = function thumbResult(value, index) {
 };
 
 function displayResults(url, params, el, thumbType) {
+  var query = arguments.length <= 4 || arguments[4] === undefined ? false : arguments[4];
+
   $.get(url, params, function (data) {
     var $element = $(el);
     $element.html('');
-    $('.btn-more').attr('next', data.nextPageToken);
 
     var index = 1;
     var _iteratorNormalCompletion = true;
@@ -65,6 +66,12 @@ function displayResults(url, params, el, thumbType) {
           throw _iteratorError;
         }
       }
+    }
+
+    var $btn = $('.btn-more');
+    $btn.attr('next', data.nextPageToken);
+    if (query && data.items.length >= 6) {
+      $btn.removeClass('hide');
     }
   }, 'json');
 }
@@ -96,7 +103,7 @@ var popUpYT = function popUpYT(e) {
 };
 
 var showNextYT = function showNextYT() {
-  displayResults.apply(undefined, _toConsumableArray(getRequest(getSearchTerm(), undefined, undefined, $('.btn-more').attr('next'))).concat(['.results.videos', thumbResult]));
+  displayResults.apply(undefined, _toConsumableArray(getRequest(getSearchTerm(), 6, undefined, $('.btn-more').attr('next'))).concat(['.results.videos', thumbResult]));
 };
 
 $(function () {
@@ -106,7 +113,7 @@ $(function () {
     e.preventDefault();
     var searchTerm = getSearchTerm();
     if (searchTerm === null || searchTerm.length < 2) return;
-    displayResults.apply(undefined, _toConsumableArray(getRequest(searchTerm, 6)).concat(['.results.videos', thumbResult]));
+    displayResults.apply(undefined, _toConsumableArray(getRequest(searchTerm, 6)).concat(['.results.videos', thumbResult, true]));
   });
 
   $('.recents.videos, .results.videos').on('click', '.recipe-video', popUpYT);

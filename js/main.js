@@ -40,11 +40,10 @@ let thumbResult = function (value, index) {
   }
 }
 
-function displayResults(url, params, el, thumbType) {
+function displayResults(url, params, el, thumbType, query = false) {
   $.get(url, params, function (data) {
     var $element = $(el)
     $element.html('')
-    $('.btn-more').attr('next', data.nextPageToken)
 
     let index = 1
     for (let value of data.items) {
@@ -52,6 +51,12 @@ function displayResults(url, params, el, thumbType) {
       index = __ret.index
       let thumb = __ret.thumb
       $element.append(thumb)
+    }
+
+    const $btn = $('.btn-more');
+    $btn.attr('next', data.nextPageToken)
+    if (query && data.items.length >= 6) {
+      $btn.removeClass('hide')
     }
   }, 'json')
 }
@@ -83,7 +88,7 @@ let popUpYT = function (e) {
 }
 
 let showNextYT = function () {
-  displayResults(...getRequest(getSearchTerm(), undefined, undefined,
+  displayResults(...getRequest(getSearchTerm(), 6, undefined,
     $('.btn-more').attr('next')), '.results.videos', thumbResult)
 }
 
@@ -94,7 +99,7 @@ $(function () {
     e.preventDefault()
     const searchTerm = getSearchTerm();
     if (searchTerm === null || searchTerm.length < 2) return
-    displayResults(...getRequest(searchTerm, 6), '.results.videos', thumbResult)
+    displayResults(...getRequest(searchTerm, 6), '.results.videos', thumbResult, true)
   })
 
   $('.recents.videos, .results.videos').on('click', '.recipe-video', popUpYT)
