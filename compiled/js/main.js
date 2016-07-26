@@ -109,11 +109,13 @@ var showNextYT = function showNextYT() {
 $(function () {
   displayResults.apply(undefined, _toConsumableArray(getRequest('')).concat(['.recents.videos', thumbResult]));
 
-  $('#recipe-search, #recipe-search-sm').on('submit', function (e) {
-    e.preventDefault();
-    var searchTerm = getSearchTerm();
-    if (searchTerm === null || searchTerm.length < 2) return;
-    displayResults.apply(undefined, _toConsumableArray(getRequest(searchTerm, 6)).concat(['.results.videos', thumbResult, true]));
+  $('#recipe-search>input, #recipe-search-sm>input').on('keydown', function (e) {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      var searchTerm = getSearchTerm();
+      if (searchTerm === null || searchTerm.length < 2) return;
+      displayResults.apply(undefined, _toConsumableArray(getRequest(searchTerm, 6)).concat(['.results.videos', thumbResult, true]));
+    }
   });
 
   $('.recents.videos, .results.videos').on('click', '.recipe-video', popUpYT);

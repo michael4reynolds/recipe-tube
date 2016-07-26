@@ -95,11 +95,13 @@ let showNextYT = function () {
 $(function () {
   displayResults(...getRequest(''), '.recents.videos', thumbResult)
 
-  $('#recipe-search, #recipe-search-sm').on('submit', (e) => {
-    e.preventDefault()
-    const searchTerm = getSearchTerm();
-    if (searchTerm === null || searchTerm.length < 2) return
-    displayResults(...getRequest(searchTerm, 6), '.results.videos', thumbResult, true)
+  $('#recipe-search>input, #recipe-search-sm>input').on('keydown', (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault()
+      const searchTerm = getSearchTerm();
+      if (searchTerm === null || searchTerm.length < 2) return
+      displayResults(...getRequest(searchTerm, 6), '.results.videos', thumbResult, true)
+    }
   })
 
   $('.recents.videos, .results.videos').on('click', '.recipe-video', popUpYT)
