@@ -62,7 +62,8 @@ function displayResults(url, params, el, thumbType, query = false) {
 }
 
 let getSearchTerm = () => {
-  return $('[name=recipe]').val()
+  let $searchTerm = $('[name=recipe]').is(':visible') ? $('[name=recipe]') : $('[name=recipe-sm]')
+  return $searchTerm.val()
 }
 
 let popUpYT = function (e) {
@@ -95,13 +96,14 @@ let showNextYT = function () {
 $(function () {
   displayResults(...getRequest(''), '.recents.videos', thumbResult)
 
-  $('#recipe-search>input, #recipe-search-sm>input').on('keydown', (e) => {
-    if (e.keyCode === 13) {
-      e.preventDefault()
-      const searchTerm = getSearchTerm();
-      if (searchTerm === null || searchTerm.length < 2) return
-      displayResults(...getRequest(searchTerm, 6), '.results.videos', thumbResult, true)
-    }
+  $('form').on('submit', (e) => {
+    e.preventDefault()
+    const searchTerm = getSearchTerm();
+    if (searchTerm === null || searchTerm.length < 2) return
+    displayResults(...getRequest(searchTerm, 6), '.results.videos', thumbResult, true)
+    $('html, body').animate({
+      scrollTop: $('#results-header').offset().top
+    }, 500)
   })
 
   $('.recents.videos, .results.videos').on('click', '.recipe-video', popUpYT)

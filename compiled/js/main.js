@@ -77,7 +77,8 @@ function displayResults(url, params, el, thumbType) {
 }
 
 var getSearchTerm = function getSearchTerm() {
-  return $('[name=recipe]').val();
+  var $searchTerm = $('[name=recipe]').is(':visible') ? $('[name=recipe]') : $('[name=recipe-sm]');
+  return $searchTerm.val();
 };
 
 var popUpYT = function popUpYT(e) {
@@ -109,13 +110,14 @@ var showNextYT = function showNextYT() {
 $(function () {
   displayResults.apply(undefined, _toConsumableArray(getRequest('')).concat(['.recents.videos', thumbResult]));
 
-  $('#recipe-search>input, #recipe-search-sm>input').on('keydown', function (e) {
-    if (e.keyCode === 13) {
-      e.preventDefault();
-      var searchTerm = getSearchTerm();
-      if (searchTerm === null || searchTerm.length < 2) return;
-      displayResults.apply(undefined, _toConsumableArray(getRequest(searchTerm, 6)).concat(['.results.videos', thumbResult, true]));
-    }
+  $('form').on('submit', function (e) {
+    e.preventDefault();
+    var searchTerm = getSearchTerm();
+    if (searchTerm === null || searchTerm.length < 2) return;
+    displayResults.apply(undefined, _toConsumableArray(getRequest(searchTerm, 6)).concat(['.results.videos', thumbResult, true]));
+    $('html, body').animate({
+      scrollTop: $('#results-header').offset().top
+    }, 500);
   });
 
   $('.recents.videos, .results.videos').on('click', '.recipe-video', popUpYT);
